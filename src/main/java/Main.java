@@ -3,18 +3,20 @@ import java.util.PrimitiveIterator;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.util.Arrays.sort;
+
 public class Main {
     static final int MIN_BOUND_VALUE = 0;
     static final  int MAX_BOUND_VALUE = Integer.MAX_VALUE/2;
     static final int MIN_VALUE = -100;
     static final int MAX_VALUE = 100;
-    static final int ARRAY_LENGTH = 10;
+    static final int ARRAY_LENGTH = 8;
     static final int solution = 4;
     private static final PrimitiveIterator.OfInt randomIntsGenerator =
             new Random().ints(MIN_VALUE,MAX_VALUE ).iterator();
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
        int[] array = new int[ARRAY_LENGTH];
        System.out.print("исходный массив: ");
        for (int i = 0; i < array.length; i++) {
@@ -23,6 +25,61 @@ public class Main {
        }
         System.out.println();
 
+    }*/
+    public static void main(String[] args) {
+        int[] array = new int[ARRAY_LENGTH];
+        for(int i = 0; i < array.length; i++) array[i] = randomIntsGenerator.nextInt();
+        printArray(array, "     исходное состояние массива");
+
+        sort(array, 0, array.length - 1);
+        printArray(array, "         отсортированный массив");
+    }
+    static int rightHasLess(int[] array, int from, int middle, int to){
+        int min = array[from];
+        for(int i = from + 1; i <= to; i++) {
+            if(array[i] >= min) continue;
+            if(i > middle) return i;
+            min = array[i];
+        }
+        return -1;
+    }
+    static void swap(int[] array, int from, int middle, int to, boolean recursive){
+        int min = array[from];
+        for(int i = from + 1; i <= middle; i++) {
+            min = Math.min(array[i], min);
+        }
+        int indexOfLess = -1;
+        for(int i = middle + 1; i <= to; i++){
+            if(array[i] >= min) continue;
+            indexOfLess = i;
+            break;
+        }
+        if(indexOfLess == -1) return;
+        int tmp = array[indexOfLess];
+        array[indexOfLess] = array[middle];
+        array[middle] = tmp;
+        if(recursive) sort(array, from, to);
+        printArray(array, "промежуточное состояние массива");
+    }
+    public static void sort(int[] array, int from, int to){
+
+        if(!(from < to)) return;
+        int middle = getMiddle(from, to);
+        sort(array, from, middle);
+        sort(array, middle + 1, to);
+        merge(array, from, middle, to);
+    }
+
+    static void merge(int[] array, int from, int middle, int to){
+        swapRecursive(array, from, middle, to);
+    }
+    static void printArray(int[] array, String description){
+        System.out.print(description + ": ");
+        for (int i : array) System.out.print(i + " ");
+        System.out.println();
+    }
+    static void swapRecursive(int[] array, int from, int middle, int to){
+        swap(array, from, middle, to, true);
     }
 
     public static int getMiddle(int from, int to) {

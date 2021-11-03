@@ -53,7 +53,7 @@ public class B_SplitTest {
     }
 
     private static int[] split(int from, int  to, boolean right){
-        int middle = Main.getRoundDownMiddle(from, to);
+        int middle = Main.getMiddle(from, to);
         int first = right ? middle + 1 : from;
         int last = right ? to : middle;
         int[] result = new int[right ? to - middle : middle - from + 1];
