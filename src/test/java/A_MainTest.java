@@ -6,9 +6,10 @@ import java.util.PrimitiveIterator;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Тестирование программы")
-public class MainTest {
+public class A_MainTest {
 
     private static final PrimitiveIterator.OfInt randomIntsGenerator =
             new Random().ints(Main.MIN_BOUND_VALUE, Main.MAX_BOUND_VALUE).iterator();
@@ -35,10 +36,17 @@ public class MainTest {
         assertTrue(middle >= from && middle < to);
     }
 
-    @Test
-    @DisplayName("Простая арифметика")
-    void test() {
-        assertTrue (2 * 2 == 4);
-        assertEquals(4,2 * 2);
+    @RepeatedTest(500)
+    @DisplayName("Проверка на правильность слагаемых")
+    void arithmeticСheck() {
+       assertThrows(ArithmeticException.class,()-> Main.getArithmeticСheck(randomIntsGenerator.nextInt(), randomIntsGenerator.nextInt()));
+       }
+    @RepeatedTest(1)
+    @DisplayName("Проверка на правильность ответа")
+    void arithmeticСheckSumma(){
+        final int a = randomIntsGenerator.nextInt();
+        final int b = randomIntsGenerator.nextInt() + 20;
+        assertThrows(ArithmeticException.class,() -> Main.getArithmeticСheck(a, b));
+
     }
 }

@@ -1,6 +1,7 @@
 import java.io.UnsupportedEncodingException;
 import java.util.PrimitiveIterator;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     static final int MIN_BOUND_VALUE = 0;
@@ -8,8 +9,10 @@ public class Main {
     static final int MIN_VALUE = -100;
     static final int MAX_VALUE = 100;
     static final int ARRAY_LENGTH = 10;
+    static final int solution = 4;
     private static final PrimitiveIterator.OfInt randomIntsGenerator =
             new Random().ints(MIN_VALUE,MAX_VALUE ).iterator();
+
 
     public static void main(String[] args) {
        int[] array = new int[ARRAY_LENGTH];
@@ -19,6 +22,7 @@ public class Main {
            System.out.print(array[i] + " ");
        }
         System.out.println();
+
     }
 
     public static int getMiddle(int from, int to) {
@@ -28,5 +32,12 @@ public class Main {
         double length = to + from;
         double middle = Math.floor(length / 2);
         return (int)middle;
+    }
+
+   //Напишите числа a и b, сумма которых будет равна 4
+    public static int getArithmeticСheck(int a, int b) {
+        if (a < 0 || b < 0) throw new ArithmeticException("Слагаемое не может быть меньше 0 ");
+        if (a + b != solution) throw new ArithmeticException("В сумме должно получится 4");
+        return a + b;
     }
 }
