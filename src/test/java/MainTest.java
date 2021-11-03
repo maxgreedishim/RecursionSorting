@@ -6,13 +6,15 @@ import java.util.PrimitiveIterator;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
-@DisplayName("Main class testing")
+
+@DisplayName("Тестирование программы")
 public class MainTest {
 
     private static final PrimitiveIterator.OfInt randomIntsGenerator =
             new Random().ints(Main.MIN_BOUND_VALUE, Main.MAX_BOUND_VALUE).iterator();
 
     @Test
+    @DisplayName("Тест на экстримальные ситуации")
     void checkExtremalSituations(){
         assertThrows(ArithmeticException.class,()-> Main.getMiddle(-1,1000));
         assertThrows(ArithmeticException.class,()-> Main.getMiddle(0,Integer.MAX_VALUE));
@@ -20,9 +22,8 @@ public class MainTest {
         assertThrows(ArithmeticException.class,()-> Main.getMiddle(20,10));
     }
 
-
-    @RepeatedTest(10000)
-    @DisplayName("Check the middle.")
+    @RepeatedTest(5)
+    @DisplayName("Проверка серидины")
     void checkTheMiddle(){
         int from = randomIntsGenerator.nextInt();
         int to = randomIntsGenerator.nextInt();
@@ -35,7 +36,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("Simple arephmetic")
+    @DisplayName("Простая арифметика")
     void test() {
         assertTrue (2 * 2 == 4);
         assertEquals(4,2 * 2);

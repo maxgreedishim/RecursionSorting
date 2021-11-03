@@ -1,9 +1,10 @@
+import java.io.UnsupportedEncodingException;
 import java.util.PrimitiveIterator;
 import java.util.Random;
 
 public class Main {
     static final int MIN_BOUND_VALUE = 0;
-    static  final  int MAX_BOUND_VALUE = Integer.MAX_VALUE/2;
+    static final  int MAX_BOUND_VALUE = Integer.MAX_VALUE/2;
     static final int MIN_VALUE = -100;
     static final int MAX_VALUE = 100;
     static final int ARRAY_LENGTH = 10;
@@ -12,8 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
        int[] array = new int[ARRAY_LENGTH];
-       System.out.print("Исходный массив: ");
-       for (int i = 0; i < array.length; i++){
+       System.out.print("исходный массив: ");
+       for (int i = 0; i < array.length; i++) {
            array[i] = randomIntsGenerator.nextInt();
            System.out.print(array[i] + " ");
        }
@@ -28,5 +29,4 @@ public class Main {
         double middle = Math.floor(length / 2);
         return (int)middle;
     }
-
 }

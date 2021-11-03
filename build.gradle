@@ -1,9 +1,7 @@
-plugins {
-    id 'java'
+apply plugin: 'java'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
-
-version '1.0-SNAPSHOT'
-
 repositories {
     mavenCentral()
 }
@@ -14,8 +12,10 @@ dependencies {
 }
 
 test {
+    systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
     testLogging {
         events "PASSED", "SKIPPED", "FAILED"
     }
+
 }
